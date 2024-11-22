@@ -1,0 +1,65 @@
+npm install react-scripts@latest --legacy-peer-deps
+npm install @capacitor/core @capacitor/cli
+npm install capacitor-print
+splash screen add
+npm install @capacitor/splash-screen --legacy-peer-deps
+syn splash screen logo, logo in android/app/src/main/res/drawable
+
+npm install -D typescript
+npm install @capacitor/android
+npm install @capacitor/ios
+
+
+
+npx cap init
+
+npx cap add ios
+
+npx cap add android
+npm run build
+npx cap copy
+
+<!-- one liner -->
+npm run build && npx cap copy && cd android && ./gradlew assembleDebug && cd ../ && npx cap run android && npx cap open android
+
+Open the iOS project in Xcode:
+npx cap open ios
+
+
+Open the Android project in Android Studio:
+cd android
+To build the APK, run:
+./gradlew assembleDebug
+npx cap run android
+npx cap open android
+
+npm run build && npx cap copy && cd android && ./gradlew assembleDebug && cd ../ && npx cap run android && npx cap open android
+
+ios
+npm run build
+npx cap add ios
+npx cap sync ios
+npx cap open ios
+npx cap copy ios
+npx cap run ios 
+
+
+npm run build && npx cap sync ios && npx cap open ios && npx cap copy ios && npx cap run ios
+
+npm run build && npx cap copy && cd android && ./gradlew assembleDebug && cd ../ && npx cap run android && npx cap open android
+pmarks1914@gmail.com
+
+capacitor.config
+
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Your App Name',
+  webDir: 'build',
+  server: {
+    androidScheme: 'https'
+  }
+};
+
+export default config;
