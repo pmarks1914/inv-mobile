@@ -360,7 +360,7 @@ const InvoiceGenerator = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-6 mb-6">
-                    {/* <div>
+                    <div>
                         <div className="font-medium mb-2">From:</div>
                         <input
                             type="text"
@@ -378,7 +378,7 @@ const InvoiceGenerator = () => {
                             placeholder="Your Company Address"
                             rows="3"
                         />
-                    </div> */}
+                    </div>
                     <div>
                         <div className="font-medium mb-2">Bill To:</div>
                         <input
