@@ -391,14 +391,19 @@ const DashboardViewInvoice = () => {
                     />
                 </div>
 
-                <button
-                    onClick={() => printInvoice()}
-                    className="mt-6 mb-6 bg-color-light-blue p-2 rounded"
-                >
-                    View Invoice
-                </button>
 
-                <FileShareButton invoiceContent={invoiceContent} />
+                <div className="grid grid-cols-2"> 
+
+                    <button
+                        onClick={() => printInvoice()}
+                        className="mt-6 mb-6 bg-color-light-blue p-2 rounded"
+                    >
+                        View Invoice
+                    </button>
+
+                    <FileShareButton invoiceContent={invoiceContent} />
+
+                </div>
 
             </Container>
 
