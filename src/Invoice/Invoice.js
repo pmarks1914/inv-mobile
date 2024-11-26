@@ -6,6 +6,7 @@ import { Col, Container, Row } from 'reactstrap';
 import Swal from 'sweetalert2';
 
 import { Printer } from '@bcyesil/capacitor-plugin-printer';
+import FileShareButton from './FileShareButton';
 
 let userDataStore = JSON.parse(localStorage.getItem("userDataStore"));
 
@@ -328,6 +329,14 @@ const InvoiceGenerator = () => {
         });
     }
 
+    // const shareUrls = {
+    //     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareLink)}`,
+    //     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareLink)}&text=${encodeURIComponent(text)}`,
+    //     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareLink)}`,
+    //     email: `mailto:?subject=${encodeURIComponent(`Shared File: ${file.name}`)}&body=${encodeURIComponent(`${text}\n\n${shareLink}`)}`,
+    //     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${text}\n${shareLink}`)}`,
+    // };
+
 
     return (
         <div className="max-w-4xl mx-auto p-6 mb-10 bg-white rounded-lg shadow-lg">
@@ -476,12 +485,14 @@ const InvoiceGenerator = () => {
                     />
                 </div>
 
+
                 <button
                     onClick={actionManage}
                     className="mt-6 bg-color-light-blue p-2 rounded"
                 >
                     Print Invoice
                 </button>
+                <FileShareButton />
 
             </Container>
 
