@@ -3,167 +3,216 @@ import { Share } from '@capacitor/share';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import html2pdf from 'html2pdf.js';
 
+
+let userDataStore = JSON.parse(localStorage.getItem("userDataStore"));
+
+const logo = userDataStore?.user?.file_photo || 'https://test.ventureinnovo.com/static/media/logo.a51192bf9b20006900d6.png';
+
+// get old invoice list
+const getInvoice = JSON.parse(localStorage.getItem("old-invoice"));
+
+// console.log("logo >>", userDataStore?.user?.file_photo)
 const ShareProForma = () => {
   const [isSharing, setIsSharing] = useState(false);
+  const [invoiceData, setInvoiceData] = useState(getInvoice);
 
-  const htmlContent = `<!DOCTYPE html>
-        <html>
-        <head>
-        <title>Pro-Forma</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            }
+  const calculateSubtotal = () => {
+    return invoiceData?.items?.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+  };
 
-            h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            }
+  const calculateTax = () => {
+    return calculateSubtotal() * 0.1; // 10% tax rate
+  };
 
-            .section {
-            margin-bottom: 20px;
-            }
-
-            .section h2 {
-            font-size: 18px;
-            margin-bottom: 8px;
-            }
-
-            table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            }
-
-            table, th, td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: left;
-            }
-
-            .logo {
-            width: 90px;
-            }
-
-            .watermark {
-            position: fixed;
-            top: 40%;
-            left: 12%;
-            transform: translate(-50%, -50%);
-            opacity: 0.3;
-            z-index: -1;
-            }
-            .total {
-            font-weight: bold;
-            }
-
-            .text-right {
-            text-align: right;
-            }
-
-            @media print {
-            body {
-                margin: 0;
-                padding: 20px;
-                -webkit-print-color-adjust: exact;
-            }
-
-            .watermark {
-                opacity: 0.3 !important;
-            }
-            }
-        </style>
-        </head>
-        <body>
-        <table style="width: 100%; margin-bottom: 20px; padding-left: 0px; border: none;">
-            <tr style="border: 0px solid #fff; padding-left: 0px;" >
-            <td style="width: 30%; vertical-align: top; border: 0px solid #fff; padding-left: 0px;">
-                <h1>Pro-Forma</h1>
-            </td>
-            <td style="width: 40%; vertical-align: top; border: 1px solid #fff"> </td>
-            <td style="width: 30%; text-align: right; border: 1px solid #fff">
-                <img src="https://invoice-ms-s3.s3.us-east-2.amazonaws.com/65bae6b2-dfa9-40d9-a432-315cab3c9922.png" alt="Company Logo" class="logo" />
-            </td>
-            </tr>
-        </table>
-
-        <table style="width: 100%; margin-bottom: 0px; padding-left: 0px; border: none;">
-            <tr style="border: 0px solid #fff; padding-left: 0px;" >
-            <td style="width: 40%; vertical-align: top; border: 0px solid #fff; padding-left: 0px;">
-                <div class="section-bill-from padding-left: 0px;">
-                <h2>From</h2>
-                <p>Cone </p>
-                <p>P.o.Box 23456 PME st.</p>
-                </div>
-            </td>
-            <td style="width: 40%; vertical-align: top; border: 1px solid #fff">
-                <div class="section-bill-to">
-                <h2>Bill To</h2>
-                <p></p>
-                <p></p>
-                </div>
-            </td>
-            </tr>
-        </table>
-
-        <div class="section">
-            <h2>Pro-Forma Details</h2>
-            <p>Pro-Forma Number: </p>
-            <p>Date: 2024-11-20</p>
-        </div>
-
-        <div class="section">
-            <h2>Items</h2>
-            <table>
-            <thead>
-                <tr>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td></td>
-                <td>1</td>
-                <td>USD 0.00</td>
-                <td class="text-right">USD 0.00</td>
-                </tr>
-                <tr style=" padding-top: 0px; margin-top: 0px; border: 1px solid #000">
-                    <td style="border: 0px solid #fff"></td>
-                    <td style="border: 0px solid #fff"></td>  
-                    <td style="border: 0px solid #fff"></td>                        
-                    <td class="text-right" style="border: 0px solid #fff">        
-                        <div class="section-total">
-                            <p>Subtotal: USD 0.00</p>
-                            <p>Tax (10%): USD 0.00</p>
-                            <p class="total">Total: USD 0.00</p>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-
-        <div class="section">
-            <h2>Notes</h2>
-            <p>This is for the purchase of goods and services</p>
-        </div>
-        </body>
-        </html>`;
+  const calculateTotal = () => {
+    return calculateSubtotal() + calculateTax();
+  };
 
   const shareProforma = async () => {
     try {
       setIsSharing(true);
 
+      // Create the HTML content
+      const invoiceContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <title>${invoiceData?.invoiceType || "Invoice"}</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+                body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+                }
+      
+                h1 {
+                font-size: 24px;
+                margin-bottom: 10px;
+                }
+      
+                .section {
+                margin-bottom: 20px;
+                }
+      
+                .section h2 {
+                font-size: 18px;
+                margin-bottom: 8px;
+                }
+      
+                table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+                }
+      
+                table, th, td {
+                border: 1px solid #000;
+                padding: 8px;
+                text-align: left;
+                }
+      
+                .logo {
+                width: 90px;
+                }
+      
+                .watermark {
+                position: fixed;
+                top: 40%;
+                left: 12%;
+                transform: translate(-50%, -50%);
+                opacity: 0.3;
+                z-index: -1;
+                }
+                .total {
+                font-weight: bold;
+                }
+      
+                .text-right {
+                text-align: right;
+                }
+      
+                @media print {
+                body {
+                    margin: 0;
+                    padding: 20px;
+                    -webkit-print-color-adjust: exact;
+                }
+      
+                .watermark {
+                    opacity: 0.3 !important;
+                }
+                }
+            </style>
+            </head>
+            <body>
+            <!-- <img src=${logo} alt="Company Logo" class="watermark" style="width: 400px; height: auto;" /> -->
+      
+            <!-- Table layout for logo and invoice Type -->
+            <table style="width: 100%; margin-bottom: 20px; padding-left: 0px; border: none;">
+                <tr style="border: 0px solid #fff; padding-left: 0px;" >
+                <td style="width: 30%; vertical-align: top; border: 0px solid #fff; padding-left: 0px;">
+                    <h1>${invoiceData?.invoiceType || "Invoice"}</h1>
+                </td>
+                <td style="width: 40%; vertical-align: top; border: 1px solid #fff"> </td>
+                <td style="width: 30%; text-align: right; border: 1px solid #fff">
+                    <img src=${logo} alt="Company Logo" class="logo" />
+                </td>
+                </tr>
+            </table>
+      
+            <!-- Table layout for billing sections -->
+            <table style="width: 100%; margin-bottom: 0px; padding-left: 0px; border: none;">
+                <tr style="border: 0px solid #fff; padding-left: 0px;" >
+                <td style="width: 40%; vertical-align: top; border: 0px solid #fff; padding-left: 0px;">
+                    <div class="section-bill-from padding-left: 0px;">
+                    <h2>From</h2>
+                    <p>${invoiceData?.companyName}</p>
+                    <p>${invoiceData?.companyAddress}</p>
+                    </div>
+                </td>
+                <td style="width: 40%; vertical-align: top; border: 1px solid #fff">
+                    <div class="section-bill-to">
+                    <h2>Bill To</h2>
+                    <p>${invoiceData?.clientName}</p>
+                    <p>${invoiceData?.clientAddress}</p>
+                    </div>
+                </td>
+                </tr>
+            </table>
+      
+            <div class="section">
+                <h2>${invoiceData?.invoiceType || "Invoice"} Details</h2>
+                <p>${invoiceData?.invoiceType || "Invoice"} Number: ${invoiceData?.invoiceNumber}</p>
+                <p>Date: ${invoiceData?.date}</p>
+            </div>
+      
+            <div class="section">
+                <h2>Items</h2>
+                <table>
+                <thead>
+                    <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${invoiceData?.items?.map(item => `
+                    <tr>
+                    <td>${item.description}</td>
+                    <td>${item.quantity}</td>
+                    <td>${invoiceData?.currency} ${item.price.toFixed(2)}</td>
+                    <td class="text-right">${invoiceData?.currency} ${(item.quantity * item.price).toFixed(2)}</td>
+                    </tr>
+                    `).join('')}
+                    
+                
+                    <tr style=" padding-top: 0px; margin-top: 0px; border: 1px solid #000">
+                        <td style="border: 0px solid #fff"></td>
+                        <td style="border: 0px solid #fff"></td>  
+                        <td style="border: 0px solid #fff"></td>                        
+                        <td class="text-right" style="border: 0px solid #fff">        
+                            <div class="section-total">
+                                <p>Subtotal: ${invoiceData?.currency} ${calculateSubtotal().toFixed(2)}</p>
+                                <p>Tax (10%): ${invoiceData?.currency} ${calculateTax().toFixed(2)}</p>
+                                <p class="total">Total: ${invoiceData?.currency} ${calculateTotal().toFixed(2)}</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                
+                </table>
+            </div>
+      
+            <div class="section">
+                <h2>Notes</h2>
+                <p>${invoiceData?.notes}</p>
+            </div>
+            </body>
+            </html>
+        `;
+
       // Create a temporary container for the HTML content
       const container = document.createElement('div');
-      container.innerHTML = htmlContent;
+      container.innerHTML = invoiceContent;
       document.body.appendChild(container);
+
+
+      // Create an iframe and set its content
+      // const iframe = document.createElement('iframe');
+      // document.body.appendChild(iframe);
+      // iframe.style.position = 'absolute';
+      // iframe.style.width = '0';
+      // iframe.style.height = '0';
+      // iframe.style.border = 'none';
+
+      // const doc = iframe.contentWindow.document;
+      // doc.open();
+      // doc.write(invoiceContent);
+      // doc.close();
+
 
       // Configure PDF options
       const opt = {
@@ -226,14 +275,17 @@ const ShareProForma = () => {
   };
 
   return (
-    <div className="p-4">
-      <button
-        onClick={shareProforma}
-        disabled={isSharing}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
-      >
-        {isSharing ? 'Creating PDF...' : 'Share as PDF'}
-      </button>
+    <div className="pt-4">
+      {
+        window.Capacitor.platform === "web" ? "" :
+          <button
+            onClick={shareProforma}
+            disabled={isSharing}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
+          >
+            {isSharing ? 'Creating PDF...' : 'Share as PDF'}
+          </button>
+      }
     </div>
   );
 };
