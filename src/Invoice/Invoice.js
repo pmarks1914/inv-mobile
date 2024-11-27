@@ -368,8 +368,8 @@ const InvoiceGenerator = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6 mb-6">
-                    <div>
+                <div className="grid grid-cols-1 gap-6 mb-6">
+                    {/* <div>
                         <div className="font-medium mb-2">From:</div>
                         <input
                             type="text"
@@ -387,7 +387,7 @@ const InvoiceGenerator = () => {
                             placeholder="Your Company Address"
                             rows="3"
                         />
-                    </div>
+                    </div> */}
                     <div>
                         <div className="font-medium mb-2">Bill To:</div>
                         <input
@@ -485,14 +485,19 @@ const InvoiceGenerator = () => {
                     />
                 </div>
 
+                <div className="grid grid-cols-2">
+                    <div className="">
+                        <button
+                            onClick={actionManage}
+                            className="mt-6 bg-color-light-blue p-2 rounded"
+                        >
+                            Print Invoice
+                        </button>
+                    </div>
 
-                <button
-                    onClick={actionManage}
-                    className="mt-6 bg-color-light-blue p-2 rounded"
-                >
-                    Print Invoice
-                </button>
-                <FileShareButton />
+                    <FileShareButton />
+
+                </div>
 
             </Container>
 
