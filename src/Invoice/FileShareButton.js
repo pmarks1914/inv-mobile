@@ -6,15 +6,13 @@ import html2pdf from 'html2pdf.js';
 
 let userDataStore = JSON.parse(localStorage.getItem("userDataStore"));
 
-
+const logo = userDataStore?.user?.file_photo || 'https://test.ventureinnovo.com/static/media/logo.a51192bf9b20006900d6.png';
 
 // get old invoice list
 const getInvoice = JSON.parse(localStorage.getItem("old-invoice"));
 
-// console.log("logo >>", userDataStore?.user?.file_photo)
+console.log("logo >>>>", userDataStore?.user?.file_photo)
 const ShareProForma = () => {
-  const logo = userDataStore?.user?.file_photo || 'https://test.ventureinnovo.com/static/media/logo.a51192bf9b20006900d6.png';
-  
   const [isSharing, setIsSharing] = useState(false);
   const [invoiceData, setInvoiceData] = useState(getInvoice);
 
