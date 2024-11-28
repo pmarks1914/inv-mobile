@@ -11,7 +11,7 @@ const logo = userDataStore?.user?.file_photo || 'https://test.ventureinnovo.com/
 // get old invoice list
 const getInvoice = JSON.parse(localStorage.getItem("old-invoice"));
 
-console.log("logo >>>>", logo)
+
 const ShareProForma = () => {
   const [isSharing, setIsSharing] = useState(false);
   const [invoiceData, setInvoiceData] = useState(getInvoice);
