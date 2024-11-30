@@ -111,13 +111,13 @@ const ShareProForma = () => {
             <!-- Table layout for logo and invoice Type -->
             <table style="width: 100%; margin-bottom: 20px; padding-left: 0px; border: none;">
                 <tr style="border: 0px solid #fff; padding-left: 0px;" >
-                <td style="width: 30%; vertical-align: top; border: 0px solid #fff; padding-left: 0px;">
-                    <h1>${invoiceData?.invoiceType || "Invoice"}</h1>
-                </td>
-                <td style="width: 40%; vertical-align: top; border: 1px solid #fff"> </td>
-                <td style="width: 30%; text-align: right; border: 1px solid #fff">
-                    <img src=${logo} alt="Company Logo" class="logo" />
-                </td>
+                  <td style="width: 30%; vertical-align: top; border: 0px solid #fff; padding-left: 0px;">
+                      <h1>${invoiceData?.invoiceType || "Invoice"}</h1>
+                  </td>
+                  <td style="width: 50%; vertical-align: top; border: 1px solid #fff"> </td>
+                  <td style="width: 20%; text-align: right; border: 0px solid #fff; ">
+                      <img src=${logo} alt="Company Logo" class="" style="width: 100%" />
+                  </td>
                 </tr>
             </table>
       
