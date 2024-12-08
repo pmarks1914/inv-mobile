@@ -5,7 +5,73 @@
     <title>Pro-Forma</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
 
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .logo {
+            width: 90px;
+        }
+
+        .watermark {
+            position: fixed;
+            top: 40%;
+            left: 12%;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 20px;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .watermark {
+                opacity: 0.3 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
