@@ -109,6 +109,13 @@ const DashboardViewInvoice = () => {
     </style>
     </head>
     <body>
+
+    <div class="header">
+    </div>
+
+    <div class="footer">
+    </div>
+
     <!-- <img src=${logo} alt="Company Logo" class="watermark" style="width: 400px; height: auto;" /> -->
 
     <!-- Table layout for logo and invoice Type -->
@@ -192,6 +199,11 @@ const DashboardViewInvoice = () => {
     <div class="section">
         <h2>Notes</h2>
         <p>${invoiceData?.notes}</p>
+    </div>
+
+
+
+    <div class="footer">
     </div>
     </body>
     </html>
