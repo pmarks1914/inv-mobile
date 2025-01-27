@@ -136,7 +136,7 @@ const DashboardViewInvoice = () => {
         </td>
         <td style="width: 40%; vertical-align: top; border: 1px solid #fff">
             <div class="section-bill-to">
-            <h2>Bill To</h2>
+            <h2>To</h2>
             <p>${invoiceData?.clientName}</p>
             <p>${invoiceData?.clientAddress}</p>
             </div>
@@ -214,7 +214,7 @@ const DashboardViewInvoice = () => {
                         Printer.print({ content: invoiceContent })
 
                     } catch (error) {
-                        console.error('Error printing invoice:', error);
+                        console.error(`Error printing ${invoiceData?.invoiceType }:`, error);
                     } finally {
                         console.log('Print result:');
                     }
@@ -292,7 +292,7 @@ const DashboardViewInvoice = () => {
 
                 <div className="grid grid-cols-1 gap-6 mb-6">
                     <div>
-                        <div className="font-medium mb-2">Bill To:</div>
+                        <div className="font-medium mb-2">To:</div>
                         <input
                             type="text"
                             name="clientName"
@@ -380,7 +380,7 @@ const DashboardViewInvoice = () => {
                             onClick={() => printInvoice()}
                             className="mt-6 mb-6 bg-color-light-blue p-2 rounded"
                         >
-                            View Invoice
+                            View {invoiceData?.invoiceType}
                         </button>
                     </div>
 

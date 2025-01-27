@@ -133,7 +133,7 @@ const ShareProForma = () => {
                 </td>
                 <td style="width: 40%; vertical-align: top; border: 1px solid #fff">
                     <div class="section-bill-to">
-                    <h2>Bill To</h2>
+                    <h2>To</h2>
                     <p>${invoiceData?.clientName}</p>
                     <p>${invoiceData?.clientAddress}</p>
                     </div>

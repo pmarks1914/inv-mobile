@@ -186,7 +186,7 @@ const InvoiceGenerator = () => {
             </td>
             <td style="width: 40%; vertical-align: top; border: 0px solid #fff">
                 <div class="section-bill-to">
-                <h2>Bill To</h2>
+                <h2>To</h2>
                 <p>${invoiceData?.clientName}</p>
                 <p>${invoiceData?.clientAddress}</p>
                 </div>
@@ -263,7 +263,7 @@ const InvoiceGenerator = () => {
                         Printer.print({ content: invoiceContent })
 
                     } catch (error) {
-                        console.error('Error printing invoice:', error);
+                        console.error(`Error printing ${profileData?.invoiceType }:`, error);
                     } finally {
                         console.log('Print result:');
                     }
@@ -311,7 +311,7 @@ const InvoiceGenerator = () => {
 
         Swal.fire({
             icon: 'info',
-            title: 'Action: Generate Invoice',
+            title: 'Action: Generate',
             text: 'Proceed to generate',
             showCancelButton: true,
             showConfirmButton: true,
@@ -346,7 +346,7 @@ const InvoiceGenerator = () => {
 
                 <div className="grid grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Invoice Number</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1"> {profileData?.invoiceType} Number</label>
                         <input
                             type="text"
                             name="invoiceNumber"
@@ -389,7 +389,7 @@ const InvoiceGenerator = () => {
                         />
                     </div> */}
                     <div>
-                        <div className="font-medium mb-2">Bill To:</div>
+                        <div className="font-medium mb-2">To:</div>
                         <input
                             type="text"
                             name="clientName"
@@ -491,7 +491,7 @@ const InvoiceGenerator = () => {
                             onClick={actionManage}
                             className="mt-6 bg-color-light-blue p-2 rounded"
                         >
-                            Print Invoice
+                            Print {invoiceData?.invoiceType}
                         </button>
                     </div>
 
