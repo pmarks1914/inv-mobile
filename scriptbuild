@@ -47,6 +47,7 @@ npx cap run ios
 npm run build && npx cap sync ios && npx cap open ios && npx cap copy ios && npx cap run ios
 
 npm run build && npx cap copy && cd android && ./gradlew assembleDebug && cd ../ && npx cap run android && npx cap open android
+
 pmarks1914@gmail.com
 
 capacitor.config
