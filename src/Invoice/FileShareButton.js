@@ -103,11 +103,37 @@ const ShareProForma = () => {
                     opacity: 0.3 !important;
                 }
                 }
+                .header {
+                  width: 70%;
+                  background-color: #3B82F6;
+                  color: #fff;
+                  text-align: center;
+                  border-radius: 100px 0 100px 0;
+                  position: relative;
+                  overflow: hidden;
+                  float: right;
+                  padding-bottom: 20px;
+                  padding-top: 20px;
+                  margin-bottom: 50px;
+                  clear: both;
+              }
+              .footer {
+                  width: 100px;
+                  background-color: #3B82F6;
+                  padding: 20px;
+                  border-radius: 100px 0 100px 0;
+                  position: relative;
+                  overflow: hidden;
+                  float: right;
+                  padding-bottom: 50px;
+                  margin-bottom: 50px;
+                  clear: both;
+              }
             </style>
             </head>
             <body>
 
-            <div class="header">
+             <div class="header" >
             </div>
 
             <!-- <img src=${logo} alt="Company Logo" class="watermark" style="width: 400px; height: auto;" /> -->
@@ -120,7 +146,7 @@ const ShareProForma = () => {
                   </td>
                   <td style="width: 50%; vertical-align: top; border: 1px solid #fff"> </td>
                   <td style="width: 20%; text-align: right; border: 0px solid #fff; ">
-                      <img src=${logo} alt="Company Logo" class="" style="width: 100%" />
+                      <!-- <img src=${logo} alt="Company Logo" class="" style="width: 100%" /> -->
                   </td>
                 </tr>
             </table>
@@ -195,8 +221,6 @@ const ShareProForma = () => {
                 <p>${invoiceData?.notes}</p>
             </div>
 
-            <div class="footer">
-            </div>
             </body>
             </html>
         `;
