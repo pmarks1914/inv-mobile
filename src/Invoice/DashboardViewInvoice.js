@@ -106,9 +106,37 @@ const DashboardViewInvoice = () => {
             opacity: 0.3 !important;
         }
         }
+        .header {
+            width: 100px;
+            background-color: #3B82F6;
+            padding: 20px;
+            border-radius: 100px 0 100px 0;
+            position: relative;
+            overflow: hidden;
+            float: left;
+            padding-bottom: 50px;
+            margin-bottom: 50px;
+            clear: both;
+        }
+        .footer {
+            width: 100px;
+            background-color: #3B82F6;
+            padding: 20px;
+            border-radius: 100px 0 100px 0;
+            position: relative;
+            overflow: hidden;
+            float: right;
+            padding-bottom: 50px;
+            margin-bottom: 50px;
+            clear: both;
+        }
     </style>
     </head>
     <body>
+
+    <div class="header">
+    </div>
+
     <!-- <img src=${logo} alt="Company Logo" class="watermark" style="width: 400px; height: auto;" /> -->
 
     <!-- Table layout for logo and invoice Type -->
@@ -192,6 +220,11 @@ const DashboardViewInvoice = () => {
     <div class="section">
         <h2>Notes</h2>
         <p>${invoiceData?.notes}</p>
+    </div>
+
+
+
+    <div class="footer">
     </div>
     </body>
     </html>
