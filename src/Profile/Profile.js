@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import logo from '../logo.png'
 import { Col, Container, Row } from 'reactstrap';
 import Swal from 'sweetalert2';
@@ -98,7 +99,35 @@ const Profile = () => {
                             className="w-full p-2 border rounded mb-2"
                             placeholder="Your Company Name"
                         />
-                        <label htmlFor='companyAddress'> Address </label>
+                        
+
+
+                        {/* // Inside your component: */}
+                        <label htmlFor='companyAddress'>Address</label>
+                        <ReactQuill
+                            id='companyAddress'
+                            value={profileData?.companyAddress}
+                            onChange={(content) => {
+                                handleInputChange({
+                                    target: {
+                                        name: 'companyAddress',
+                                        value: content
+                                    }
+                                });
+                            }}
+                            className="mb-2"
+                            placeholder="Your Company Address"
+                            modules={{
+                                toolbar: [
+                                    ['bold', 'italic', 'underline'],
+                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                    ['clean']
+                                ]
+                            }}
+                            theme="snow"
+                        />
+
+                        {/* <label htmlFor='companyAddress'> Address </label>
                         <textarea
                             name="companyAddress"
                             id='companyAddress'
@@ -107,7 +136,8 @@ const Profile = () => {
                             className="w-full p-2 border rounded mb-2"
                             placeholder="Your Company Address"
                             rows="3"
-                        />
+                        /> */}
+
                         <label htmlFor='currency'> Currency </label>
                         <input
                             type="text"

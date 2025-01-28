@@ -157,14 +157,16 @@ const InvoiceGenerator = () => {
             }
             }
             .header {
-                width: 100px;
+                width: 70%;
                 background-color: #3B82F6;
-                padding: 20px;
+                color: #fff;
+                text-align: center;
                 border-radius: 100px 0 100px 0;
                 position: relative;
                 overflow: hidden;
-                float: left;
-                padding-bottom: 50px;
+                float: right;
+                padding-bottom: 20px;
+                padding-top: 20px;
                 margin-bottom: 50px;
                 clear: both;
             }
@@ -184,7 +186,7 @@ const InvoiceGenerator = () => {
         </head>
         <body>
 
-        <div class="header">
+        <div class="header" >
         </div>
 
         <!-- <img src=${logo} alt="Company Logo" class="watermark" style="width: 400px; height: auto;" /> -->
@@ -197,7 +199,7 @@ const InvoiceGenerator = () => {
             </td>
             <td style="width: 40%; vertical-align: top; border: 0px solid #fff"> </td>
             <td style="width: 30%; text-align: right; border: 0px solid #fff">
-                <img src=${logo} alt="Company Logo" class="logo" />
+                <!-- <img src=${logo} alt="Company Logo" class="logo" /> -->
             </td>
             </tr>
         </table>
@@ -272,9 +274,6 @@ const InvoiceGenerator = () => {
             <p>${invoiceData?.notes}</p>
         </div>
 
-
-        <div class="footer">
-        </div>
         </body>
         </html>
         `;
