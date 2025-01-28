@@ -100,9 +100,6 @@ const Profile = () => {
                             placeholder="Your Company Name"
                         />
                         
-
-
-                        {/* // Inside your component: */}
                         <label htmlFor='companyAddress'>Address</label>
                         <ReactQuill
                             id='companyAddress'
