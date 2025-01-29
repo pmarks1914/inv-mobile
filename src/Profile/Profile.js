@@ -156,7 +156,7 @@ const Profile = () => {
                         />
                         <label htmlFor='tax'> Tax </label>
                         <input
-                            type="number"
+                            type="text"
                             name="tax"
                             value={profileData?.tax * 100}
                             onChange={(e) => handleInputTaxChange(e)}

@@ -24,42 +24,88 @@ const Login = () => {
             "active_status": null,
             "address": "",
             "country": null,
-            "created_by": null,
+            "created_by": "pmarks1914@gmail.com",
             "created_on": "2024-11-18 13: 57: 16.440362",
-            "email": null,
+            "email": "pmarks1914@gmail.com",
             "first_name": "Test B",
             "id": "45724ffc-cca4-48a3-bd94-9a7436692448",
             "last_name": "Tests",
             "other_info": null,
             "other_name": "",
             "phone": null,
-            "updated_by": null,
+            "updated_by": "pmarks1914@gmail.com",
             "updated_on": "2024-11-18 13:57:16.440434",
-            "file_photo": null
+            "count_stats": {
+                "file": 2
+            },
+            "file_photo": "https://invoice-ms-s3.s3.us-east-2.amazonaws.com/fd875eb3-6013-475a-a697-ebb76f2ee628.png"
         },
         "access_key": {
             "exp": 1738023508,
             "id": "45724ffc-cca4-48a3-bd94-9a7436692448"
         },
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzgwMjM1MDgsImlkIjoiNDU3MjRmZmMtY2NhNC00OGEzLWJkOTQtOWE3NDM2NjkyNDQ4In0.Ch8yaHNrheWU0sXN59m2zzsiUNSfJiqYb4c5J2UxIGc",
+        "type": "Student",
         "counter": 600000
     }
-      localStorage.setItem("userDataStore", JSON.stringify(user_data));
+      // localStorage.setItem("userDataStore", JSON.stringify(user_data));
 
       // let userDataStore = JSON.parse(localStorage.getItem("userDataStore"));
       
       setTimeout(() => window.location.href = '/home', 1000);
     }
-    else{
+
+    if (!email || !password) return;
+
+    setLoading(true);
+    setLoginError("");
+
+    try {
+      // axios.post()
+      let data = JSON.stringify({
+        "email": email,
+        "password": password
+      });
+
+
+      let config = {
+        method: 'post',
+        url: process.env.REACT_APP_BASE_API + "/login",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: data
+      };
+      const response = await axios(config);
+
+      const userData = { ...response.data, type: userType, counter: 600000 };
+      // console.log(userData)
+      localStorage.setItem("userDataStore", JSON.stringify(userData));
+      setTimeout(() => window.location.href = '/home', 1000);
+
+      userData = {
+        "user": {
+          "active_status": null,
+          "address": "",
+          "country": null,
+          "created_by": null,
+          "created_on": null,
+          "email": null,
+          "first_name": null,
+          "id": "45724ffc-cca4-48a3-bd94-9a7436692448",
+          "access_key": {
+            "exp": 1738023508,
+            "id": "45724ffc-cca4-48a3-bd94-9a7436692448"
+          },
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzgwMjM1MDgsImlkIjoiNDU3MjRmZmMtY2NhNC00OGEzLWJkOTQtOWE3NDM2NjkyNDQ4In0.Ch8yaHNrheWU0sXN59m2zzsiUNSfJiqYb4c5J2UxIGc",
+          "counter": 600000
+        }
+      }
+
+    } catch (err) {
+      setLoading(false);
       setLoginError("Incorrect email or password.");
     }
-
-    // if (!email || !password) return;
-
-    // setLoading(true);
-    // setLoginError("");
-
-    
   };
 
   return (
