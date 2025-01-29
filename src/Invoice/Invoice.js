@@ -28,7 +28,8 @@ const InvoiceGenerator = () => {
         items: [{ description: '', quantity: 1, price: 0 }],
         notes: profileData?.notes || '',
         currency: profileData?.currency || 'GHS',
-        invoiceType: profileData?.invoiceType || "Invoice"
+        invoiceType: profileData?.invoiceType || "Invoice",
+        tax: (profileData?.tax || 0) * 100
     });
 
     const calculateSubtotal = () => {
@@ -258,7 +259,7 @@ const InvoiceGenerator = () => {
                     <td class="text-right" style="border: 0px solid #fff">        
                         <div class="section-total">
                             <p>Subtotal: ${invoiceData?.currency} ${calculateSubtotal().toFixed(2)}</p>
-                            <p>Tax (${invoiceData?.currency}%): ${invoiceData?.currency} ${calculateTax().toFixed(2)}</p>
+                            <p>Tax (${invoiceData?.tax}%): ${invoiceData?.currency} ${calculateTax().toFixed(2)}</p>
                             <p class="total">Total: ${invoiceData?.currency} ${calculateTotal().toFixed(2)}</p>
                         </div>
                     </td>
