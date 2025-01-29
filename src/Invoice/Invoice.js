@@ -246,8 +246,8 @@ const InvoiceGenerator = () => {
                 <tr>
                 <td>${item.description}</td>
                 <td>${item.quantity}</td>
-                <td>${invoiceData?.currency} ${item.price.toFixed(2)}</td>
-                <td class="text-right">${invoiceData?.currency} ${(item.quantity * item.price).toFixed(2)}</td>
+                <td>${invoiceData?.currency} ${item.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</td>
+                <td class="text-right">${invoiceData?.currency} ${(item.quantity * item.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</td>
                 </tr>
                 `).join('')}
                 
@@ -258,9 +258,9 @@ const InvoiceGenerator = () => {
                     <td style="border: 0px solid #fff"></td>                        
                     <td class="text-right" style="border: 0px solid #fff">        
                         <div class="section-total">
-                            <p>Subtotal: ${invoiceData?.currency} ${calculateSubtotal().toFixed(2)}</p>
-                            <p>Tax (${invoiceData?.tax}%): ${invoiceData?.currency} ${calculateTax().toFixed(2)}</p>
-                            <p class="total">Total: ${invoiceData?.currency} ${calculateTotal().toFixed(2)}</p>
+                            <p>Subtotal: ${invoiceData?.currency} ${calculateSubtotal().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</p>
+                            <p>Tax (${invoiceData?.tax}%): ${invoiceData?.currency} ${calculateTax().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</p>
+                            <p class="total">Total: ${invoiceData?.currency} ${calculateTotal().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</p>
                         </div>
                     </td>
                 </tr>
@@ -490,15 +490,15 @@ const InvoiceGenerator = () => {
                         <div className="w-64">
                             <div className="flex justify-between mb-2">
                                 <span>Subtotal:</span>
-                                <span>{invoiceData?.currency} {calculateSubtotal().toFixed(2)}</span>
+                                <span>{invoiceData?.currency} {calculateSubtotal().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</span>
                             </div>
                             <div className="flex justify-between mb-2">
                                 <span>Tax ( {(profileData?.tax || 0) * 100}%):</span>
-                                <span>{invoiceData?.currency} {calculateTax().toFixed(2)}</span>
+                                <span>{invoiceData?.currency} {calculateTax().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</span>
                             </div>
                             <div className="flex justify-between font-bold">
                                 <span>Total:</span>
-                                <span>{invoiceData?.currency}{calculateTotal().toFixed(2)}</span>
+                                <span>{invoiceData?.currency}{calculateTotal().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</span>
                             </div>
                         </div>
                     </div>

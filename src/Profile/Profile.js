@@ -158,10 +158,10 @@ const Profile = () => {
                         <input
                             type="number"
                             name="tax"
-                            value={profileData?.tax * 100}
+                            value={(profileData?.tax || 0) * 100}
                             onChange={(e) => handleInputTaxChange(e)}
                             className="w-full p-2 border rounded"
-                            placeholder="Tax rate eg. 10"
+                            // placeholder="Tax rate eg. 10"
                             min="0"
                             max="100"
                         />
