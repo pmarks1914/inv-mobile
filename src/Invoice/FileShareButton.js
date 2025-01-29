@@ -132,9 +132,8 @@ const ShareProForma = () => {
             </style>
             </head>
             <body>
-
-             <div class="header" >
-            </div>
+            
+            <div class="header" > <strong> ${invoiceData?.invoiceNumber} </strong> </div>
 
             <!-- <img src=${logo} alt="Company Logo" class="watermark" style="width: 400px; height: auto;" /> -->
       
