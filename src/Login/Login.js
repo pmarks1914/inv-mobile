@@ -29,7 +29,7 @@ const Login = () => {
             "email": null,
             "first_name": "Test B",
             "id": "45724ffc-cca4-48a3-bd94-9a7436692448",
-            "last_name": "Tests",
+            "last_name": "RenDarl",
             "other_info": null,
             "other_name": "",
             "phone": null,
