@@ -205,7 +205,7 @@ const ShareProForma = () => {
                         <td class="text-right" style="border: 0px solid #fff">        
                             <div class="section-total">
                                 <p>Subtotal: ${invoiceData?.currency} ${calculateSubtotal().toFixed(2)}</p>
-                                <p>Tax (10%): ${invoiceData?.currency} ${calculateTax().toFixed(2)}</p>
+                                <p>Tax (${invoiceData?.tax}%): ${invoiceData?.currency} ${calculateTax().toFixed(2)}</p>
                                 <p class="total">Total: ${invoiceData?.currency} ${calculateTotal().toFixed(2)}</p>
                             </div>
                         </td>
