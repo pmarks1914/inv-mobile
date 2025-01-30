@@ -6,7 +6,7 @@ import { Col, Container, Row } from 'reactstrap';
 import Swal from 'sweetalert2';
 
 import { Printer } from '@bcyesil/capacitor-plugin-printer';
-import FileShareButton from './FileShareButton';
+import InvFileShareButton from './InvFileShareButton';
 
 let userDataStore = JSON.parse(localStorage.getItem("userDataStore"));
 
@@ -526,7 +526,7 @@ const InvoiceGenerator = () => {
                         </button>
                     </div>
 
-                    <FileShareButton />
+                    <InvFileShareButton getInvoice={invoiceData} />
 
                 </div>
 
