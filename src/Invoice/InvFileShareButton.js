@@ -122,8 +122,8 @@ const InvFileShareButton = (props) => {
                   position: relative;
                   overflow: hidden;
                   float: right;
-                  padding-bottom: 20px;
-                  padding-top: 20px;
+                  padding-bottom: 10px;
+                  padding-top: 10px;
                   margin-bottom: 50px;
                   clear: both;
               }
@@ -143,7 +143,7 @@ const InvFileShareButton = (props) => {
             </head>
             <body>
             
-            <div class="header" > <strong> ${invoiceData?.invoiceNumber} </strong> </div>
+            <div class="header" > <strong> ${invoiceData?.companyName} </strong> </div>
 
             <!-- <img src=${logo} alt="Company Logo" class="watermark" style="width: 400px; height: auto;" /> -->
       
