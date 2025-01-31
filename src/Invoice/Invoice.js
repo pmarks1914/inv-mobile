@@ -198,8 +198,8 @@ const InvoiceGenerator = () => {
                 position: relative;
                 overflow: hidden;
                 float: right;
-                padding-bottom: 20px;
-                padding-top: 20px;
+                padding-bottom: 10px;
+                padding-top: 10px;
                 margin-bottom: 50px;
                 clear: both;
             }
