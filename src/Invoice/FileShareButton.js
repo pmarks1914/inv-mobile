@@ -12,7 +12,7 @@ const logo = userDataStore?.user?.file_photo || 'https://test.ventureinnovo.com/
 const getInvoice = JSON.parse(localStorage.getItem("old-invoice"));
 
 
-const ShareProForma = () => {
+const ViewShareProForma = () => {
   const [isSharing, setIsSharing] = useState(false);
   const [invoiceData, setInvoiceData] = useState(getInvoice);
 
@@ -192,8 +192,8 @@ const ShareProForma = () => {
                     <tr>
                     <td>${item.description}</td>
                     <td>${item.quantity}</td>
-                    <td>${invoiceData?.currency} ${item.price.toFixed(2)}</td>
-                    <td class="text-right">${invoiceData?.currency} ${(item.quantity * item.price).toFixed(2)}</td>
+                    <td>${invoiceData?.currency} ${item.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</td>
+                    <td class="text-right">${invoiceData?.currency} ${(item.quantity * item.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</td>
                     </tr>
                     `).join('')}
                     
@@ -204,9 +204,9 @@ const ShareProForma = () => {
                         <td style="border: 0px solid #fff"></td>                        
                         <td class="text-right" style="border: 0px solid #fff">        
                             <div class="section-total">
-                                <p>Subtotal: ${invoiceData?.currency} ${calculateSubtotal().toFixed(2)}</p>
-                                <p>Tax (${invoiceData?.tax}%): ${invoiceData?.currency} ${calculateTax().toFixed(2)}</p>
-                                <p class="total">Total: ${invoiceData?.currency} ${calculateTotal().toFixed(2)}</p>
+                                <p>Subtotal: ${invoiceData?.currency} ${calculateSubtotal().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</p>
+                                <p>Tax (${invoiceData?.tax}%): ${invoiceData?.currency} ${calculateTax().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</p>
+                                <p class="total">Total: ${invoiceData?.currency} ${calculateTotal().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString()}</p>
                             </div>
                         </td>
                     </tr>
@@ -320,4 +320,4 @@ const ShareProForma = () => {
   );
 };
 
-export default ShareProForma;
+export default ViewShareProForma;
