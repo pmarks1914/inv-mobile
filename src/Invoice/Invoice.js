@@ -31,6 +31,7 @@ const InvoiceGenerator = () => {
         invoiceType: profileData?.invoiceType || "Invoice",
         tax: (profileData?.tax || 0) * 100
     });
+    const [incShare, setIncShare] = useState({})
 
     const calculateSubtotal = () => {
         return invoiceData?.items?.reduce((sum, item) => sum + (item.quantity * item.price), 0);
@@ -44,13 +45,44 @@ const InvoiceGenerator = () => {
         return calculateSubtotal() + calculateTax();
     };
 
-    const handleInputChange = (e) => {
+    function invFunShare(e){
         const { name, value } = e.target;
-        setInvoiceData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        setIncShare({ ...incShare, ...{[name]: value} })
+        console.log(incShare, name, value)
+    }
+
+    function handleInputChange(field, e){
+        // e.preventDefault()
+        // const { name, value } = e.target;
+        // alert(`>> , ${field}, ${value}`)
+        if("invoiceNumber" === field){
+            // 
+            setInvoiceData({ ...invoiceData, ...{"invoiceNumber": e.target?.value} })
+        }
+        if('date' === field ){
+            // 
+            setInvoiceData({ ...invoiceData, ...{"date": e.target?.value} })
+        }
+        if('clientName' === field){
+            // 
+            setInvoiceData({ ...invoiceData, ...{"clientName": e.target?.value} })
+        }
+        if('clientAddress' === field){
+            // 
+            setInvoiceData({ ...invoiceData, ...{"clientAddress": e.target?.value} })
+        }
+        if('notes' === field){
+            // 
+            setInvoiceData({ ...invoiceData, ...{"notes": e.target?.value} })
+        }
+        
+        // console.log(invoiceData)
+        // setInvoiceData(prev => ({
+        //     ...prev,
+        //     [name]: value
+        // }));
     };
+
 
     const handleItemChange = (index, field, value) => {
         const newItems = [...invoiceData?.items];
@@ -382,7 +414,7 @@ const InvoiceGenerator = () => {
                             type="text"
                             name="invoiceNumber"
                             value={invoiceData?.invoiceNumber}
-                            onChange={handleInputChange}
+                            onChange={(e)=> { handleInputChange("invoiceNumber", e) } }
                             className="w-full p-2 border rounded"
                             placeholder="INV-001"
                         />
@@ -393,9 +425,10 @@ const InvoiceGenerator = () => {
                             type="date"
                             name="date"
                             value={invoiceData?.date}
-                            onChange={handleInputChange}
+                            onChange={(e)=> { handleInputChange("date", e) } }
+                            // onChange={(e)=> { (handleInputChange); (invFunShare(e)) } }
                             className="w-full p-2 border rounded"
-                        />
+                        /> 
                     </div>
                 </div>
 
@@ -406,14 +439,14 @@ const InvoiceGenerator = () => {
                             type="text"
                             name="companyName"
                             value={invoiceData?.companyName}
-                            onChange={handleInputChange}
+                            onChange={(e)=> { handleInputChange(e) } }
                             className="w-full p-2 border rounded mb-2"
                             placeholder="Your Company Name"
                         />
                         <textarea
                             name="companyAddress"
                             value={invoiceData?.companyAddress}
-                            onChange={handleInputChange}
+                            onChange={(e)=> { handleInputChange(e) } }
                             className="w-full p-2 border rounded"
                             placeholder="Your Company Address"
                             rows="3"
@@ -425,14 +458,14 @@ const InvoiceGenerator = () => {
                             type="text"
                             name="clientName"
                             value={invoiceData?.clientName}
-                            onChange={handleInputChange}
+                            onChange={(e)=> { handleInputChange("clientName", e) } }
                             className="w-full p-2 border rounded mb-2"
                             placeholder="Client Name"
-                        />
+                        /> 
                         <textarea
                             name="clientAddress"
                             value={invoiceData?.clientAddress}
-                            onChange={handleInputChange}
+                            onChange={(e)=> { handleInputChange("clientAddress", e) } }
                             className="w-full p-2 border rounded"
                             placeholder="Client Address"
                             rows="3"
@@ -509,11 +542,11 @@ const InvoiceGenerator = () => {
                     <textarea
                         name="notes"
                         value={invoiceData?.notes}
-                        onChange={handleInputChange}
+                        onChange={(e)=> { handleInputChange("notes", e) } }
                         className="w-full p-2 border rounded"
                         placeholder="Additional notes..."
                         rows="3"
-                    />
+                    /> 
                 </div>
 
                 <div className="grid grid-cols-2">
@@ -522,11 +555,11 @@ const InvoiceGenerator = () => {
                             onClick={actionManage}
                             className="mt-6 bg-color-light-blue p-2 rounded"
                         >
-                            Print {invoiceData?.invoiceType}
+                            Create {invoiceData?.invoiceType}
                         </button>
                     </div>
 
-                    <InvFileShareButton getInvoice={invoiceData} />
+                    {/* <InvFileShareButton getInvoice={invoiceData} /> */}
 
                 </div>
 

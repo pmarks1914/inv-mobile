@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Share } from '@capacitor/share';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import html2pdf from 'html2pdf.js';
+import PropTypes, { func } from "prop-types";
 
 
 let userDataStore = JSON.parse(localStorage.getItem("userDataStore"));
@@ -12,9 +13,9 @@ const logo = userDataStore?.user?.file_photo || 'https://test.ventureinnovo.com/
 // const getInvoice = JSON.parse(localStorage.getItem("old-invoice"));
 
 
-const InvFileShareButton = (getInvoice) => {
+const InvFileShareButton = (props) => {
   const [isSharing, setIsSharing] = useState(false);
-  const [invoiceData, setInvoiceData] = useState(getInvoice);
+  const [invoiceData, setInvoiceData] = useState(props.getInvoice);
 
   const calculateSubtotal = () => {
     return invoiceData?.items?.reduce((sum, item) => sum + (item.quantity * item.price), 0);
@@ -31,6 +32,15 @@ const InvFileShareButton = (getInvoice) => {
   const shareProforma = async () => {
     try {
       setIsSharing(true);
+
+        // get old invoice list
+        const invoiceGetData = JSON.parse(localStorage.getItem("invoice"));
+
+        let newInvoiceData = []
+        newInvoiceData = invoiceGetData || []
+        newInvoiceData.push(invoiceData)
+        // set new invoice
+        localStorage.setItem("invoice", JSON.stringify(newInvoiceData));
 
       // Create the HTML content
       const invoiceContent = `
@@ -321,3 +331,9 @@ const InvFileShareButton = (getInvoice) => {
 };
 
 export default InvFileShareButton;
+
+
+InvFileShareButton.propTypes = {
+  // id: PropTypes.string,
+  getInvoice: PropTypes.instanceOf(PropTypes.any).isRequired
+};
